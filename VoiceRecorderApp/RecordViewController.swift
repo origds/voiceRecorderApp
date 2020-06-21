@@ -69,6 +69,29 @@ class RecordViewController: UIViewController, UITableViewDelegate, UITableViewDa
         audioPlayer?.play()
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+    {
+        let delete = UIContextualAction(style: .destructive, title: "Eliminar") {
+            (action, view, completionHandler) in
+            let filePath = self.audiosFilePath[indexPath.row]
+            self.deleteAudio(filePath: filePath)
+            self.audiosFilePath.remove(at: indexPath.row)
+            self.recordsTable.reloadData()
+        }
+
+        let rename = UIContextualAction(style: .normal, title: "Renombrar") {
+            (action, view, completionHandler) in
+            //
+        }
+        rename.backgroundColor = UIColor.blue
+
+        return UISwipeActionsConfiguration(actions: [delete, rename])
+    }
+    
     // MARK: Action button
     
     @objc func recordNewVoicenote()
@@ -81,6 +104,16 @@ class RecordViewController: UIViewController, UITableViewDelegate, UITableViewDa
         vc.normalTintColor = UIColor.purple
         vc.highlightedTintColor = UIColor.purple
         self.presentBlurredAudioRecorderViewControllerAnimated(vc)
+    }
+    
+    func deleteAudio(filePath: String)
+    {
+        let fileManager = FileManager.default
+        do {
+            try fileManager.removeItem(atPath: filePath)
+        } catch {
+            print("Could not clear temp folder: \(error)")
+        }
     }
     
     // MARK: IQAudioRecorderViewControllerDelegate
