@@ -37,7 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1B464F5E249A9921007AA293 /* VoiceRecorderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceRecorderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B464F5E249A9921007AA293 /* VoiceRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B464F61249A9921007AA293 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B464F63249A9921007AA293 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1B464F65249A9921007AA293 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
@@ -98,7 +98,7 @@
 		1B464F5F249A9921007AA293 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1B464F5E249A9921007AA293 /* VoiceRecorderApp.app */,
+				1B464F5E249A9921007AA293 /* VoiceRecorder.app */,
 				1B464F74249A9922007AA293 /* VoiceRecorderAppTests.xctest */,
 				1B464F7F249A9923007AA293 /* VoiceRecorderAppUITests.xctest */,
 			);
@@ -182,7 +182,7 @@
 			);
 			name = VoiceRecorderApp;
 			productName = VoiceRecorderApp;
-			productReference = 1B464F5E249A9921007AA293 /* VoiceRecorderApp.app */;
+			productReference = 1B464F5E249A9921007AA293 /* VoiceRecorder.app */;
 			productType = "com.apple.product-type.application";
 		};
 		1B464F73249A9922007AA293 /* VoiceRecorderAppTests */ = {
@@ -523,7 +523,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = origds.VoiceRecorderApp;
-				PRODUCT_NAME = VoiceRecorderApp;
+				PRODUCT_NAME = VoiceRecorder;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -542,7 +542,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = origds.VoiceRecorderApp;
-				PRODUCT_NAME = VoiceRecorderApp;
+				PRODUCT_NAME = VoiceRecorder;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
