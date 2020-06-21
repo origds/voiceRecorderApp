@@ -21,20 +21,50 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kom-xS-zBT">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kom-xS-zBT">
                                 <rect key="frame" x="0.0" y="133" width="414" height="729"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecordCell" rowHeight="148" id="dQ5-s3-2Pq" customClass="RecordTableViewCell" customModule="VoiceRecorderApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="148"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="RecordCell" rowHeight="65" id="dQ5-s3-2Pq" customClass="RecordTableViewCell" customModule="VoiceRecorderApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dQ5-s3-2Pq" id="EUm-8j-xLf">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="148"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hIZ-rY-qp0">
-                                                    <rect key="frame" x="8" y="8" width="398" height="132"/>
+                                                    <rect key="frame" x="8" y="8" width="398" height="49"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="329" translatesAutoresizingMaskIntoConstraints="NO" id="n7S-kq-Rza">
+                                                            <rect key="frame" x="8" y="14" width="338" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Sf-wx-1tb">
+                                                            <rect key="frame" x="354" y="6.5" width="36" height="36"/>
+                                                            <color key="backgroundColor" red="0.41960784309999999" green="0.79215686269999996" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="36" id="R01-Bx-Df1"/>
+                                                                <constraint firstAttribute="height" constant="36" id="sPa-Jo-JaB"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                            <color key="tintColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <state key="normal" image="play-button">
+                                                                <color key="titleColor" red="0.74048215699999997" green="0.8862745098" blue="0.86394223849999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            </state>
+                                                        </button>
+                                                    </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <constraints>
+                                                        <constraint firstItem="n7S-kq-Rza" firstAttribute="top" secondItem="hIZ-rY-qp0" secondAttribute="top" constant="14" id="ETN-2F-X0D"/>
+                                                        <constraint firstItem="3Sf-wx-1tb" firstAttribute="centerY" secondItem="n7S-kq-Rza" secondAttribute="centerY" id="cnQ-35-cso"/>
+                                                        <constraint firstAttribute="trailing" secondItem="3Sf-wx-1tb" secondAttribute="trailing" constant="8" id="h9g-wZ-6Co"/>
+                                                        <constraint firstItem="3Sf-wx-1tb" firstAttribute="leading" secondItem="n7S-kq-Rza" secondAttribute="trailing" constant="8" id="mxg-Ct-tOx"/>
+                                                        <constraint firstItem="n7S-kq-Rza" firstAttribute="leading" secondItem="hIZ-rY-qp0" secondAttribute="leading" constant="8" id="sYm-cH-f4M"/>
+                                                        <constraint firstAttribute="bottom" secondItem="n7S-kq-Rza" secondAttribute="bottom" constant="14" id="vwA-eR-5Pl"/>
+                                                        <constraint firstItem="n7S-kq-Rza" firstAttribute="centerY" secondItem="hIZ-rY-qp0" secondAttribute="centerY" id="wxp-F6-MAM"/>
+                                                    </constraints>
                                                 </view>
                                             </subviews>
                                             <constraints>
@@ -45,14 +75,29 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="audioName" destination="n7S-kq-Rza" id="Hvo-gE-UCv"/>
+                                            <outlet property="container" destination="hIZ-rY-qp0" id="Ur3-PI-nyM"/>
+                                            <outlet property="playButton" destination="3Sf-wx-1tb" id="wPk-fF-qBr"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m36-59-eIZ">
+                                <rect key="frame" x="182" y="792" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="T99-5Y-1rm"/>
+                                    <constraint firstAttribute="height" constant="50" id="oG1-p3-iSx"/>
+                                </constraints>
+                                <state key="normal" image="microphone"/>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.41960784313725491" green="0.792156862745098" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.74048215696224617" green="0.88627450980392153" blue="0.8639422384768255" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="kom-xS-zBT" secondAttribute="trailing" id="3JV-lK-bFT"/>
+                            <constraint firstItem="m36-59-eIZ" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-20" id="5eg-ch-p2M"/>
                             <constraint firstItem="JEa-vw-q0P" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="9RJ-d0-rM7"/>
+                            <constraint firstItem="m36-59-eIZ" firstAttribute="centerX" secondItem="JEa-vw-q0P" secondAttribute="centerX" id="JFA-aV-80B"/>
                             <constraint firstItem="kom-xS-zBT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="JY3-he-wqV"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="kom-xS-zBT" secondAttribute="bottom" id="fOb-Rm-nSh"/>
                             <constraint firstItem="JEa-vw-q0P" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="pct-ip-9He"/>
@@ -61,6 +106,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="recordButton" destination="m36-59-eIZ" id="wAb-4a-Uka"/>
                         <outlet property="recordsTable" destination="kom-xS-zBT" id="Lg1-Ze-oDK"/>
                         <outlet property="titleLabel" destination="JEa-vw-q0P" id="AuO-Ey-Lqa"/>
                     </connections>
@@ -70,4 +116,8 @@
             <point key="canvasLocation" x="137.68115942028987" y="126.5625"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="microphone" width="256" height="256"/>
+        <image name="play-button" width="256" height="256"/>
+    </resources>
 </document>

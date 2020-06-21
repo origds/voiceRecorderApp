@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,7 @@
 		1B464F79249A9922007AA293 /* VoiceRecorderAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B464F78249A9922007AA293 /* VoiceRecorderAppTests.swift */; };
 		1B464F84249A9923007AA293 /* VoiceRecorderAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B464F83249A9923007AA293 /* VoiceRecorderAppUITests.swift */; };
 		1B464F93249A9C6C007AA293 /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B464F92249A9C6C007AA293 /* RecordTableViewCell.swift */; };
+		68A850CF3A296F6E609CA7D4 /* Pods_VoiceRecorderApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E214BD0C2F58BDA5DFF4FE /* Pods_VoiceRecorderApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,9 @@
 		1B464F83249A9923007AA293 /* VoiceRecorderAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecorderAppUITests.swift; sourceTree = "<group>"; };
 		1B464F85249A9923007AA293 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1B464F92249A9C6C007AA293 /* RecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
+		A3E214BD0C2F58BDA5DFF4FE /* Pods_VoiceRecorderApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VoiceRecorderApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9923A8CF6DDF3B83BB9517E /* Pods-VoiceRecorderApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoiceRecorderApp.debug.xcconfig"; path = "Target Support Files/Pods-VoiceRecorderApp/Pods-VoiceRecorderApp.debug.xcconfig"; sourceTree = "<group>"; };
+		ED52712B75FFCECF6E0EA09D /* Pods-VoiceRecorderApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoiceRecorderApp.release.xcconfig"; path = "Target Support Files/Pods-VoiceRecorderApp/Pods-VoiceRecorderApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68A850CF3A296F6E609CA7D4 /* Pods_VoiceRecorderApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +90,8 @@
 				1B464F77249A9922007AA293 /* VoiceRecorderAppTests */,
 				1B464F82249A9923007AA293 /* VoiceRecorderAppUITests */,
 				1B464F5F249A9921007AA293 /* Products */,
+				26950B65C0AFFFE3E1A90335 /* Pods */,
+				A47E0AC52886C0B4BB85429B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -139,6 +146,23 @@
 			path = RecordDatasource;
 			sourceTree = "<group>";
 		};
+		26950B65C0AFFFE3E1A90335 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B9923A8CF6DDF3B83BB9517E /* Pods-VoiceRecorderApp.debug.xcconfig */,
+				ED52712B75FFCECF6E0EA09D /* Pods-VoiceRecorderApp.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		A47E0AC52886C0B4BB85429B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A3E214BD0C2F58BDA5DFF4FE /* Pods_VoiceRecorderApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -146,9 +170,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B464F88249A9923007AA293 /* Build configuration list for PBXNativeTarget "VoiceRecorderApp" */;
 			buildPhases = (
+				A6A42497B6ED4A37777C0E38 /* [CP] Check Pods Manifest.lock */,
 				1B464F5A249A9921007AA293 /* Sources */,
 				1B464F5B249A9921007AA293 /* Frameworks */,
 				1B464F5C249A9921007AA293 /* Resources */,
+				C215F800DA9B1009FD4ED6AF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -264,6 +290,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A6A42497B6ED4A37777C0E38 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VoiceRecorderApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C215F800DA9B1009FD4ED6AF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VoiceRecorderApp/Pods-VoiceRecorderApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VoiceRecorderApp/Pods-VoiceRecorderApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VoiceRecorderApp/Pods-VoiceRecorderApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1B464F5A249A9921007AA293 /* Sources */ = {
@@ -444,6 +512,7 @@
 		};
 		1B464F89249A9923007AA293 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9923A8CF6DDF3B83BB9517E /* Pods-VoiceRecorderApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -462,6 +531,7 @@
 		};
 		1B464F8A249A9923007AA293 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ED52712B75FFCECF6E0EA09D /* Pods-VoiceRecorderApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

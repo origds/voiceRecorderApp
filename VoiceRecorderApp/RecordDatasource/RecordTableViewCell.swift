@@ -8,17 +8,37 @@
 
 import UIKit
 
-class RecordTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
+class RecordTableViewCell: UITableViewCell
+{
+    
+    @IBOutlet weak var container: UIView!
+    @IBOutlet weak var audioName: UILabel!
+    @IBOutlet weak var playButton: UIButton!
+    
+    override func awakeFromNib()
+    {
         super.awakeFromNib()
-        // Initialization code
+        
+        container.layer.cornerRadius = 4
+        container.clipsToBounds = true
+        
+        playButton.backgroundColor = UIColor.purple
+        playButton.layer.cornerRadius = 18
+        playButton.clipsToBounds = true
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool)
+    {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool)
+    {
+    }
+    
+    public func showAudioRecord(filePath: String!)
+    {
+        audioName!.text = filePath!
     }
 
 }
