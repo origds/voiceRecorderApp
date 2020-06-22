@@ -10,7 +10,7 @@ import UIKit
 import IQAudioRecorderController
 import AVFoundation
 
-class RecordViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, IQAudioRecorderViewControllerDelegate
+class RecordViewController: UIViewController, IQAudioRecorderViewControllerDelegate
 {
     //GUI
     @IBOutlet weak var titleLabel: UILabel!
@@ -20,76 +20,23 @@ class RecordViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //Data
     var audiosFilePath: Array<String> = []
     var audioPlayer: AVAudioPlayer?
+    var datasource = RecordDatasource()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         titleLabel.text = "Voice Recorder App"
-        recordsTable.delegate = self
-        recordsTable.dataSource = self
+        
+        datasource.audiosFilePath = audiosFilePath
+        datasource.delegate = self
+        recordsTable.delegate = datasource
+        recordsTable.dataSource = datasource
         
         recordButton.backgroundColor = UIColor.purple
         recordButton.layer.cornerRadius = 25
         recordButton.clipsToBounds = true
         recordButton.imageEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         recordButton.addTarget(self, action: #selector(recordNewVoicenote), for: UIControl.Event.touchUpInside)
-    }
-    
-    // MARK: Table View Datasource
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return audiosFilePath.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let filePath = audiosFilePath[indexPath.row]
-        
-        if (!filePath.isEmpty)
-        {
-            let recordCell = tableView.dequeueReusableCell(withIdentifier: "RecordCell") as! RecordTableViewCell
-            recordCell.showAudioRecord(filePath: filePath)
-            return recordCell
-        }
-        
-        return UITableViewCell()
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        do {
-            let filePath = audiosFilePath[indexPath.row]
-            audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: filePath))
-        } catch let error {
-            print("No se puede reproducir el audio debido al siguiente error \(error.localizedDescription)")
-        }
-        
-        audioPlayer?.play()
-    }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
-    {
-        let delete = UIContextualAction(style: .destructive, title: "Eliminar") {
-            (action, view, completionHandler) in
-            let filePath = self.audiosFilePath[indexPath.row]
-            self.deleteAudio(filePath: filePath)
-            self.audiosFilePath.remove(at: indexPath.row)
-            self.recordsTable.reloadData()
-        }
-
-        let rename = UIContextualAction(style: .normal, title: "Renombrar") {
-            (action, view, completionHandler) in
-            //
-        }
-        rename.backgroundColor = UIColor.blue
-
-        return UISwipeActionsConfiguration(actions: [delete, rename])
     }
     
     // MARK: Action button
@@ -106,7 +53,37 @@ class RecordViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.presentBlurredAudioRecorderViewControllerAnimated(vc)
     }
     
-    func deleteAudio(filePath: String)
+    // MARK: IQAudioRecorderViewControllerDelegate
+    
+    func audioRecorderController(_ controller: IQAudioRecorderViewController, didFinishWithAudioAtPath filePath: String)
+    {
+        controller.dismiss(animated: true) {
+            self.audiosFilePath.append(filePath)
+            self.datasource.audiosFilePath = self.audiosFilePath
+            self.recordsTable.reloadData()
+        }
+    }
+    
+    func audioRecorderControllerDidCancel(_ controller: IQAudioRecorderViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+}
+    
+// MARK: ResourceDatasourceDelegate
+    
+extension RecordViewController: RecordDatasourceDelegate
+{
+    func resourceDatasourceDidSelectAudio(filePath: String)
+    {
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: filePath))
+        } catch let error {
+            print("No se puede reproducir el audio debido al siguiente error \(error.localizedDescription)")
+        }
+        audioPlayer?.play()
+    }
+    
+    func resourceDatasourceDidDeleteAudio(filePath: String)
     {
         let fileManager = FileManager.default
         do {
@@ -116,18 +93,9 @@ class RecordViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    // MARK: IQAudioRecorderViewControllerDelegate
-    
-    func audioRecorderController(_ controller: IQAudioRecorderViewController, didFinishWithAudioAtPath filePath: String)
+    func resourceDatasourceDidRenameAudio(filePath: String)
     {
-        controller.dismiss(animated: true) {
-            self.audiosFilePath.append(filePath)
-            self.recordsTable.reloadData()
-        }
-    }
-    
-    func audioRecorderControllerDidCancel(_ controller: IQAudioRecorderViewController) {
-        controller.dismiss(animated: true, completion: nil)
+        //
     }
 }
 

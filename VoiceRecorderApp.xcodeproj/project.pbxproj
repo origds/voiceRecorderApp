@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B3154D024A0B7B00085130C /* RecordDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3154CF24A0B7B00085130C /* RecordDatasource.swift */; };
 		1B464F62249A9921007AA293 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B464F61249A9921007AA293 /* AppDelegate.swift */; };
 		1B464F64249A9921007AA293 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B464F63249A9921007AA293 /* SceneDelegate.swift */; };
 		1B464F66249A9921007AA293 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B464F65249A9921007AA293 /* RecordViewController.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B3154CF24A0B7B00085130C /* RecordDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDatasource.swift; sourceTree = "<group>"; };
 		1B464F5E249A9921007AA293 /* VoiceRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B464F61249A9921007AA293 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B464F63249A9921007AA293 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				1B464F92249A9C6C007AA293 /* RecordTableViewCell.swift */,
+				1B3154CF24A0B7B00085130C /* RecordDatasource.swift */,
 			);
 			path = RecordDatasource;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B464F66249A9921007AA293 /* RecordViewController.swift in Sources */,
+				1B3154D024A0B7B00085130C /* RecordDatasource.swift in Sources */,
 				1B464F62249A9921007AA293 /* AppDelegate.swift in Sources */,
 				1B464F93249A9C6C007AA293 /* RecordTableViewCell.swift in Sources */,
 				1B464F64249A9921007AA293 /* SceneDelegate.swift in Sources */,
