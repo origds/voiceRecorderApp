@@ -21,6 +21,7 @@ class RecordViewController: UIViewController, IQAudioRecorderViewControllerDeleg
     var audiosFilePath: Array<String> = []
     var audioPlayer: AVAudioPlayer?
     var datasource = RecordDatasource()
+    var audioName : String = ""
     
     override func viewDidLoad()
     {
@@ -29,6 +30,7 @@ class RecordViewController: UIViewController, IQAudioRecorderViewControllerDeleg
         
         datasource.audiosFilePath = audiosFilePath
         datasource.delegate = self
+        datasource.table = recordsTable
         recordsTable.delegate = datasource
         recordsTable.dataSource = datasource
         
@@ -60,7 +62,7 @@ class RecordViewController: UIViewController, IQAudioRecorderViewControllerDeleg
         controller.dismiss(animated: true) {
             self.audiosFilePath.append(filePath)
             self.datasource.audiosFilePath = self.audiosFilePath
-            self.recordsTable.reloadData()
+            self.datasource.refresh()
         }
     }
     
@@ -83,19 +85,51 @@ extension RecordViewController: RecordDatasourceDelegate
         audioPlayer?.play()
     }
     
-    func resourceDatasourceDidDeleteAudio(filePath: String)
+    func resourceDatasourceDidSelectDeleteAudio(filePath: String, indexRow: Int)
     {
-        let fileManager = FileManager.default
-        do {
-            try fileManager.removeItem(atPath: filePath)
-        } catch {
-            print("Could not clear temp folder: \(error)")
-        }
+        let alert = UIAlertController(title: "Estás seguro de eliminar este audio?", message: "Si lo eliminas no podrás recuperarlo", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Si", style: .default, handler:{ action in
+            let fileManager = FileManager.default
+            do {
+                try fileManager.removeItem(atPath: filePath)
+                self.audiosFilePath.remove(at: indexRow)
+                self.datasource.audiosFilePath = self.audiosFilePath
+                self.datasource.refresh()
+            } catch {
+                print("No se puede eliminar de la carpeta: \(error)")
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+
+        self.present(alert, animated: true)
     }
     
-    func resourceDatasourceDidRenameAudio(filePath: String)
+    func resourceDatasourceDidSelectRenameAudio(filePath: String)
     {
-        //
+        let alert = UIAlertController(title: "Renombrar audio", message: "Escribe el nuevo nombre", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Renombrar", style: .default) { (alertAction) in
+            let textField = alert.textFields![0] as UITextField
+            if (!(textField.text!.isEmpty))
+            {
+                self.audioName = textField.text!
+            }
+        }
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = "Voicenote"
+        }
+        alert.addAction(action)
+        
+        self.present(alert, animated:true)
+        
+        let fileManager = FileManager.default
+        do {
+            try fileManager.moveItem(atPath: filePath, toPath: "")
+        } catch {
+            print("No se puede renombrar debido a: \(error)")
+        }
     }
 }
 

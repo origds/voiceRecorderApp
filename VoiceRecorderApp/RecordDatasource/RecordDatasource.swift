@@ -11,14 +11,20 @@ import UIKit
 protocol RecordDatasourceDelegate: AnyObject
 {
     func resourceDatasourceDidSelectAudio(filePath: String)
-    func resourceDatasourceDidDeleteAudio(filePath: String)
-    func resourceDatasourceDidRenameAudio(filePath: String)
+    func resourceDatasourceDidSelectDeleteAudio(filePath: String, indexRow: Int)
+    func resourceDatasourceDidSelectRenameAudio(filePath: String)
 }
 
 class RecordDatasource: NSObject, UITableViewDataSource, UITableViewDelegate
 {
     weak var delegate: RecordDatasourceDelegate?
     var audiosFilePath: Array<String>?
+    var table: UITableView?
+    
+    public func refresh()
+    {
+        self.table!.reloadData()
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return audiosFilePath!.count
@@ -54,14 +60,13 @@ class RecordDatasource: NSObject, UITableViewDataSource, UITableViewDelegate
         let delete = UIContextualAction(style: .destructive, title: "Eliminar") {
             (action, view, completionHandler) in
             let filePath = self.audiosFilePath![indexPath.row]
-            self.delegate?.resourceDatasourceDidDeleteAudio(filePath: filePath)
-            self.audiosFilePath!.remove(at: indexPath.row)
-            tableView.reloadData()
+            self.delegate?.resourceDatasourceDidSelectDeleteAudio(filePath: filePath, indexRow: indexPath.row)
         }
 
         let rename = UIContextualAction(style: .normal, title: "Renombrar") {
             (action, view, completionHandler) in
-            //
+            let filePath = self.audiosFilePath![indexPath.row]
+            self.delegate?.resourceDatasourceDidSelectRenameAudio(filePath: filePath)
         }
         rename.backgroundColor = UIColor.blue
 
