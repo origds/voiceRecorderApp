@@ -109,7 +109,7 @@ extension RecordViewController: RecordDatasourceDelegate
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: voicenote.filePath!))
         } catch let error {
-            print("No se puede reproducir el audio debido al siguiente error \(error.localizedDescription)")
+            print("Is not possible to play the audio because \(error.localizedDescription)")
         }
         audioPlayer?.play()
     }
@@ -128,7 +128,7 @@ extension RecordViewController: RecordDatasourceDelegate
                 self.datasource.audios = self.audios
                 self.datasource.refresh()
             } catch {
-                print("No se puede eliminar de la carpeta: \(error)")
+                print("Can't be deleted: \(error)")
             }
         }))
         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
