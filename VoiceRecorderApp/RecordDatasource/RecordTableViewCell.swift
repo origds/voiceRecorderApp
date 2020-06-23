@@ -36,9 +36,9 @@ class RecordTableViewCell: UITableViewCell
     {
     }
     
-    public func showAudioRecord(filePath: String!)
+    public func showAudioRecord(name: String!)
     {
-        audioName!.text = filePath!
+        audioName!.text = name!
     }
 
 }

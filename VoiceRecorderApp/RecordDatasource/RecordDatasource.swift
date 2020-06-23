@@ -10,15 +10,15 @@ import UIKit
 
 protocol RecordDatasourceDelegate: AnyObject
 {
-    func resourceDatasourceDidSelectAudio(filePath: String)
-    func resourceDatasourceDidSelectDeleteAudio(filePath: String, indexRow: Int)
-    func resourceDatasourceDidSelectRenameAudio(filePath: String)
+    func resourceDatasourceDidSelectAudio(voicenote: Voicenote)
+    func resourceDatasourceDidSelectDeleteAudio(voicenote: Voicenote, indexRow: Int)
+    func resourceDatasourceDidSelectRenameAudio(voicenote: Voicenote)
 }
 
 class RecordDatasource: NSObject, UITableViewDataSource, UITableViewDelegate
 {
     weak var delegate: RecordDatasourceDelegate?
-    var audiosFilePath: Array<String>?
+    var audios: Array<Voicenote>?
     var table: UITableView?
     
     public func refresh()
@@ -27,17 +27,17 @@ class RecordDatasource: NSObject, UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return audiosFilePath!.count
+        return audios!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let filePath = audiosFilePath![indexPath.row]
+        let voicenote = audios![indexPath.row]
         
-        if (!filePath.isEmpty)
+        if !voicenote.filePath!.isEmpty
         {
             let recordCell = tableView.dequeueReusableCell(withIdentifier: "RecordCell") as! RecordTableViewCell
-            recordCell.showAudioRecord(filePath: filePath)
+            recordCell.showAudioRecord(name: voicenote.name!)
             return recordCell
         }
         
@@ -47,8 +47,8 @@ class RecordDatasource: NSObject, UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         tableView.deselectRow(at: indexPath, animated: true)
-        let filePath = self.audiosFilePath![indexPath.row]
-        delegate?.resourceDatasourceDidSelectAudio(filePath: filePath)
+        let voicenote = self.audios![indexPath.row]
+        delegate?.resourceDatasourceDidSelectAudio(voicenote: voicenote)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -59,14 +59,14 @@ class RecordDatasource: NSObject, UITableViewDataSource, UITableViewDelegate
     {
         let delete = UIContextualAction(style: .destructive, title: "Eliminar") {
             (action, view, completionHandler) in
-            let filePath = self.audiosFilePath![indexPath.row]
-            self.delegate?.resourceDatasourceDidSelectDeleteAudio(filePath: filePath, indexRow: indexPath.row)
+            let voicenote = self.audios![indexPath.row]
+            self.delegate?.resourceDatasourceDidSelectDeleteAudio(voicenote: voicenote, indexRow: indexPath.row)
         }
 
         let rename = UIContextualAction(style: .normal, title: "Renombrar") {
             (action, view, completionHandler) in
-            let filePath = self.audiosFilePath![indexPath.row]
-            self.delegate?.resourceDatasourceDidSelectRenameAudio(filePath: filePath)
+            let voicenote = self.audios![indexPath.row]
+            self.delegate?.resourceDatasourceDidSelectRenameAudio(voicenote: voicenote)
         }
         rename.backgroundColor = UIColor.blue
 

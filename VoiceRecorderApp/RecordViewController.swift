@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 import IQAudioRecorderController
 import AVFoundation
 
@@ -18,21 +19,29 @@ class RecordViewController: UIViewController, IQAudioRecorderViewControllerDeleg
     @IBOutlet weak var recordButton: UIButton!
     
     //Data
-    var audiosFilePath: Array<String> = []
+    var audios: Array<Voicenote> = []
     var audioPlayer: AVAudioPlayer?
     var datasource = RecordDatasource()
     var audioName : String = ""
-    
+    var counter = 0
+    var context: NSManagedObjectContext!
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
         titleLabel.text = "Voice Recorder App"
         
-        datasource.audiosFilePath = audiosFilePath
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            context = appDelegate.persistentContainer.viewContext
+        }
+        self.retrieveAudios()
+        
+        datasource.audios = audios
         datasource.delegate = self
         datasource.table = recordsTable
         recordsTable.delegate = datasource
         recordsTable.dataSource = datasource
+        recordsTable.reloadData()
         
         recordButton.backgroundColor = UIColor.purple
         recordButton.layer.cornerRadius = 25
@@ -60,14 +69,34 @@ class RecordViewController: UIViewController, IQAudioRecorderViewControllerDeleg
     func audioRecorderController(_ controller: IQAudioRecorderViewController, didFinishWithAudioAtPath filePath: String)
     {
         controller.dismiss(animated: true) {
-            self.audiosFilePath.append(filePath)
-            self.datasource.audiosFilePath = self.audiosFilePath
+            let newVoicenote = Voicenote(name: "Voicenote \(self.counter)", filePath: filePath, context: self.context)
+            self.audios.append(newVoicenote)
+            self.datasource.audios = self.audios
             self.datasource.refresh()
+            self.counter+=1
         }
     }
     
     func audioRecorderControllerDidCancel(_ controller: IQAudioRecorderViewController) {
         controller.dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: CoreData
+    
+    func retrieveAudios()
+    {
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        {
+            let context = appDelegate.persistentContainer.viewContext
+            let fetchRequest = NSFetchRequest<Voicenote>(entityName:"Voicenote")
+            
+            do {
+                self.audios = try context.fetch(fetchRequest)
+            } catch
+            {
+                print("Could not retrieve")
+            }
+        }
     }
 }
     
@@ -75,26 +104,28 @@ class RecordViewController: UIViewController, IQAudioRecorderViewControllerDeleg
     
 extension RecordViewController: RecordDatasourceDelegate
 {
-    func resourceDatasourceDidSelectAudio(filePath: String)
+    func resourceDatasourceDidSelectAudio(voicenote: Voicenote)
     {
         do {
-            audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: filePath))
+            audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: voicenote.filePath!))
         } catch let error {
             print("No se puede reproducir el audio debido al siguiente error \(error.localizedDescription)")
         }
         audioPlayer?.play()
     }
     
-    func resourceDatasourceDidSelectDeleteAudio(filePath: String, indexRow: Int)
+    func resourceDatasourceDidSelectDeleteAudio(voicenote: Voicenote, indexRow: Int)
     {
         let alert = UIAlertController(title: "Estás seguro de eliminar este audio?", message: "Si lo eliminas no podrás recuperarlo", preferredStyle: .alert)
 
         alert.addAction(UIAlertAction(title: "Si", style: .default, handler:{ action in
             let fileManager = FileManager.default
             do {
-                try fileManager.removeItem(atPath: filePath)
-                self.audiosFilePath.remove(at: indexRow)
-                self.datasource.audiosFilePath = self.audiosFilePath
+                try fileManager.removeItem(atPath: voicenote.filePath!)
+                let deleted = self.audios.remove(at: indexRow)
+                self.context.delete(deleted)
+                try self.context.save()
+                self.datasource.audios = self.audios
                 self.datasource.refresh()
             } catch {
                 print("No se puede eliminar de la carpeta: \(error)")
@@ -105,15 +136,21 @@ extension RecordViewController: RecordDatasourceDelegate
         self.present(alert, animated: true)
     }
     
-    func resourceDatasourceDidSelectRenameAudio(filePath: String)
+    func resourceDatasourceDidSelectRenameAudio(voicenote: Voicenote)
     {
         let alert = UIAlertController(title: "Renombrar audio", message: "Escribe el nuevo nombre", preferredStyle: .alert)
         
         let action = UIAlertAction(title: "Renombrar", style: .default) { (alertAction) in
             let textField = alert.textFields![0] as UITextField
-            if (!(textField.text!.isEmpty))
+            if !(textField.text!.isEmpty)
             {
                 self.audioName = textField.text!
+                if !self.audioName.isEmpty
+                {
+                    voicenote.rename(newName: self.audioName, context: self.context)
+                    self.retrieveAudios()
+                    self.recordsTable.reloadData()
+                }
             }
         }
         
@@ -123,13 +160,6 @@ extension RecordViewController: RecordDatasourceDelegate
         alert.addAction(action)
         
         self.present(alert, animated:true)
-        
-        let fileManager = FileManager.default
-        do {
-            try fileManager.moveItem(atPath: filePath, toPath: "")
-        } catch {
-            print("No se puede renombrar debido a: \(error)")
-        }
     }
 }
 

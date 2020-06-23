@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1B3154D024A0B7B00085130C /* RecordDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3154CF24A0B7B00085130C /* RecordDatasource.swift */; };
+		1B3154DB24A2798D0085130C /* Voicenote+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3154D924A2798D0085130C /* Voicenote+CoreDataClass.swift */; };
+		1B3154DC24A2798D0085130C /* Voicenote+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3154DA24A2798D0085130C /* Voicenote+CoreDataProperties.swift */; };
+		1B3154DD24A27B550085130C /* VoiceRecorderAppModel.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 1B3154D224A272C80085130C /* VoiceRecorderAppModel.xcdatamodeld */; };
 		1B464F62249A9921007AA293 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B464F61249A9921007AA293 /* AppDelegate.swift */; };
 		1B464F64249A9921007AA293 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B464F63249A9921007AA293 /* SceneDelegate.swift */; };
 		1B464F66249A9921007AA293 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B464F65249A9921007AA293 /* RecordViewController.swift */; };
@@ -39,6 +42,9 @@
 
 /* Begin PBXFileReference section */
 		1B3154CF24A0B7B00085130C /* RecordDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDatasource.swift; sourceTree = "<group>"; };
+		1B3154D324A272C80085130C /* VoiceRecorderAppModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VoiceRecorderAppModel.xcdatamodel; sourceTree = "<group>"; };
+		1B3154D924A2798D0085130C /* Voicenote+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Voicenote+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1B3154DA24A2798D0085130C /* Voicenote+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Voicenote+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1B464F5E249A9921007AA293 /* VoiceRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B464F61249A9921007AA293 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B464F63249A9921007AA293 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +91,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B3154D124A272140085130C /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				1B3154D224A272C80085130C /* VoiceRecorderAppModel.xcdatamodeld */,
+				1B3154D924A2798D0085130C /* Voicenote+CoreDataClass.swift */,
+				1B3154DA24A2798D0085130C /* Voicenote+CoreDataProperties.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		1B464F55249A9921007AA293 = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +126,7 @@
 		1B464F60249A9921007AA293 /* VoiceRecorderApp */ = {
 			isa = PBXGroup;
 			children = (
+				1B3154D124A272140085130C /* CoreData */,
 				1B464F91249A9C52007AA293 /* RecordDatasource */,
 				1B464F61249A9921007AA293 /* AppDelegate.swift */,
 				1B464F63249A9921007AA293 /* SceneDelegate.swift */,
@@ -272,6 +289,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B3154DD24A27B550085130C /* VoiceRecorderAppModel.xcdatamodeld in Resources */,
 				1B464F6E249A9922007AA293 /* LaunchScreen.storyboard in Resources */,
 				1B464F6B249A9922007AA293 /* Assets.xcassets in Resources */,
 				1B464F69249A9921007AA293 /* Main.storyboard in Resources */,
@@ -343,6 +361,8 @@
 			files = (
 				1B464F66249A9921007AA293 /* RecordViewController.swift in Sources */,
 				1B3154D024A0B7B00085130C /* RecordDatasource.swift in Sources */,
+				1B3154DB24A2798D0085130C /* Voicenote+CoreDataClass.swift in Sources */,
+				1B3154DC24A2798D0085130C /* Voicenote+CoreDataProperties.swift in Sources */,
 				1B464F62249A9921007AA293 /* AppDelegate.swift in Sources */,
 				1B464F93249A9C6C007AA293 /* RecordTableViewCell.swift in Sources */,
 				1B464F64249A9921007AA293 /* SceneDelegate.swift in Sources */,
@@ -676,6 +696,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1B3154D224A272C80085130C /* VoiceRecorderAppModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1B3154D324A272C80085130C /* VoiceRecorderAppModel.xcdatamodel */,
+			);
+			currentVersion = 1B3154D324A272C80085130C /* VoiceRecorderAppModel.xcdatamodel */;
+			path = VoiceRecorderAppModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1B464F56249A9921007AA293 /* Project object */;
 }
