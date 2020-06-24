@@ -4,4 +4,4 @@
 
   La estructura del proyecto es bastante sencilla, se utilizó un único view controller (el inicial) donde se muestra tanto la lista de grabaciones como el botón que permite grabar nuevos audios. Cuenta con los archivos que definen el funcionamiento de la tabla: datasource y diseño de las celdas y finalmente con los archivos de definición del modelo de CoreData.
 
-  La interfaz se trabajó haciendo uso del Storyboard.
+  La interfaz se trabajó haciendo uso del Storyboard y Autolayouts.
